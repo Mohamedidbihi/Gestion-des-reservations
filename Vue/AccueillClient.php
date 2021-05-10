@@ -75,7 +75,7 @@ require_once ("../Database/Db.php");
             <a href="../Controllers/LogOut.php"><button type="button" class="btn btn-outline-warning text-white ms-4">Se Deconnecter <?php echo $_SESSION['Nom'] ?> </button></a>
             </li>
             <li class="nav-item">
-            <a><button type="button" class="btn btn-warning text-white ms-4"> Reserver </button></a>
+            <a href="Reservation.php"><button type="button" class="btn btn-warning text-white ms-4"> Reserver </button></a>
             </li>
           </ul>
         </div>
@@ -86,7 +86,7 @@ require_once ("../Database/Db.php");
   >
       <div class="content text-center">
         <h1 class="text-white">Golden Tulip Safi  : un hôtel de luxe intemporel, inoubliable, inimitable</h1>
-        <button class="btn btn-warning" type="button">Réservez Dès Maintenant</button>
+        <a href="Reservation.php"><button class="btn btn-warning" type="button">Réservez Dès Maintenant</button></a>
       </div>
 </div>
 <div class="blank"></div>

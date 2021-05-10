@@ -5,7 +5,7 @@
         public function login($email,$password)
         {
         $query = "select * from user u,role r where u.email=? and u.password=? and  u.id_role=r.Id_Role";
-        $stmt = $this->connect()->prepare($query);
+        $stmt = $this->conn->prepare($query);
         $stmt->execute([$email,$password]);
       $count = $stmt->rowCount();
       $row   = $stmt->fetch(PDO::FETCH_ASSOC);

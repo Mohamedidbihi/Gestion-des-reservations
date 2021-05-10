@@ -6,6 +6,7 @@ require_once ("../Database/Db.php");
     {     
         header("location:sign-in.php");
     }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,13 +52,11 @@ require_once ("../Database/Db.php");
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Special Offres</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="Sign_up.php" class="nav-link text-white">S'inscrire</a>
-                    </li>
+                    
             
                     <li class="nav-item">
-                        <a><button type="button" class="btn btn-warning text-white ms-4"> Deconnexion </button></a>
-                    </li>
+            <a href="../Controllers/LogOut.php"><button type="button" class="btn btn-outline-warning text-white ms-4">Se Deconnecter <?php echo $_SESSION['Nom'] ?> </button></a>
+            </li>
                 </ul>
             </div>
         </div>
@@ -70,12 +69,12 @@ require_once ("../Database/Db.php");
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-10 mx-auto ">
                             <div class="card" style="border-radius: 1rem;">
-                                <div class="card-body p-5">
+                                <div class="card-body p-5" id='form'>
 
                                     <h1 class="mb-5 text-center">RESERVER SANS HESITER:PROTOCOLE SANITAIRES
                                         STRICTS,SEJOUR MODIFIABLE</h1>
                                 <div class="blank"></div>
-                                    <form class="was-validated" action="" method="post">
+                                    <form  class="was-validated" action="../Controllers/Reservation.php" method="post">
                                         <!-- 2 column grid layout with text inputs for the first and last names -->
                                         <div class="row">
 
@@ -98,7 +97,7 @@ require_once ("../Database/Db.php");
                                         <div class="row">
                                             <div class="col-12 col-md-4 mb-4">
                                                 <div class="form-outline">
-                                                    <select class="typebatiment form-control is-invalid" name="typebatiment[1][type-batiment]"required 
+                                                    <select class="typebatiment form-control is-invalid" name="typebatiment[1][typebatiment]"required 
                                                         onchange="hotel()">
                                                         <option value="" disabled selected>Selectioner type de
                                                             reservation</option>
@@ -132,20 +131,54 @@ require_once ("../Database/Db.php");
                                                          name="reserver"class="btn btn-warning btn-rounded btn-block ">Reserver</button>
                                                 </center><br><br>
                                                 <hr> 
-                                    </form>
+                                               
+                                    </form> 
+                                   
                                     <?php
+                                    if(!empty($_SESSION['Total']))
+                                    {
+                                       $id= $_SESSION['Id_Reservation'];
+                                       $query="SELECT * FROM module m ,filiere f, user u , formateur fr WHERE u.IdUser=fr.IdUser and f.IdF=m.idf AND fr.IdF=f.idformateur AND u.IdUser='".$_SESSION["iduser"]."'GROUP BY m.LebelleM";   
+                                        $sql = 'SELECT * from reservation where Id_Reservation=IdUser='".$_SESSION['Id_Reservation']"'';
+                                        $stmt = $this->conn->prepare($sql);
+                                        $stmt->execute([$Idres]);
+                                        $row   = $stmt->fetch(PDO::FETCH_ASSOC);
+                                        ?>
+                                        <script>
+                                            var dd=document.getElementById('form')
+                                            dd.innerHTML=` <h1 class="mb-5 text-center text-success ">Votre reservation pass avec succes avec le total :`+<?php echo $_SESSION['Total']  ?>+`
+                                            MAD </h1>
+                                            <p> Code Reservation :<?php echo $_SESSION['Id_Reservation']  ?></p>
+                                            <p>Date Debut Sejour :</p> 
+                                            <p>Date Fin Sejour :</p>
+                                            
+                                            `;
+                                        </script>
+                                  <?php  }
 if(isset($_POST['reserver']))
 {
-   $typebatiment = $_POST['typebatiment'];
-   $typepension = $_POST['pension'];
+ error_reporting(0);
    $chambree = $_POST['chambre'];
- 
-
-   print_r($chambree);
-   print_r($typepension);
-   print_r($typebatiment);
-
+   $chambrenf = $_POST['chambreenf'];
+  print_r($chambree);
+  foreach($chambrenf as $row => $innerArray){
+    foreach($innerArray as $innerRow => $value){
+        echo $value. "<br/>";
+    
+    }
 }
+//     foreach($chambree as $innerRow => $value){
+        
+//       echo $value['nbr']. "<br/>";
+//       echo $value['typechambre']. "<br/>";
+//       echo $value['vue']. "<br/>";
+//       echo $value['typelit']. "<br/>";
+    
+    
+//   }
+   
+}
+unset($_SESSION['Total']);
 ?>
                                 </div>
                             </div>

@@ -1,18 +1,28 @@
 <?php
-class bd {
- 
-    private $host = 'localhost';
-    private $user = 'root';
-    private $pwd = '';
-    private $dbName = 'brief5';
+class bd
+{
+    // private $dns = 'mysql:host=localhost;dbname=records';
+    private $server = "localhost";
+    private $username = "root";
+    private $password;
+    private $db = "brief5";
+    public $conn;
 
-    public function connect()
+    public function __construct()
     {
-        $dsn = 'mysql:host='.$this->host.';dbname='.$this->dbName;
-        $pdo = new PDO($dsn, $this->user, $this->pwd);
+        try {
+            // $this->connexion = new PDO($this->dns, $this->username, $this->password);
+            $this->conn = new PDO('mysql:host=' . $this->server . ';dbname=' . $this->db, $this->username, $this->password);
+            # set the PDO error mode to exception
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            # echo "Connected successfully";
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
 
-        return $pdo;
+    public function getConn()
+    {
+        return $this->conn;
     }
 }
-
-    ?>

@@ -1,12 +1,12 @@
-var nav = document.querySelector('nav');
+// var nav = document.querySelector('nav');
 
-window.addEventListener('scroll', function () {
-  if (window.pageYOffset > 100) {
-    nav.classList.add('bg-dark', 'shadow');
-  } else {
-    nav.classList.remove('bg-dark', 'shadow');
-  }
-});
+// window.addEventListener('scroll', function () {
+//   if (window.pageYOffset > 100) {
+//     nav.classList.add('bg-dark', 'shadow');
+//   } else {
+//     nav.classList.remove('bg-dark', 'shadow');
+//   }
+// });
 let cont = document.querySelector('#cont')
 let addbat = document.querySelector('#Addbatiment')
 let i = 1;
@@ -43,7 +43,7 @@ if (a.value == "hotel") {
           </div> 
           <div class="col-12 col-md-3 mb-4"> 
           <div class="form-outline"> 
-          <select id ="typechambre1" "chambre[1][type]"  class="newchambre1 form-control is-invalid" required> 
+          <select id ="typechambre1" name="chambre[1][typechambre]"  class="newchambre1 form-control is-invalid" required> 
           <option value="" disabled selected>Type chambre</option>
            <option value="Simple">Simple</option> 
            <option  value="Double">Double</option>
@@ -55,7 +55,6 @@ if (a.value == "hotel") {
                 <div class="lit-type1 form-outline">
                   </div>
                   </div> 
-
                     <div class="col-12 col-md-2 mb-4">
                      <div class="vue-type1 form-outline">
                      
@@ -98,13 +97,13 @@ function addchambre()
     add.innerHTML +=`<div class="newchambre${i} row">
             <div class="col-12 col-md-2 mb-4">
              <div class="form-outline">
-              <input type="number" id="nbr-chambre${i}"name="chambre[${j}][nbr]" required class="form-control is-invalid" min=0> 
+              <input type="number" id="nbr-chambre${i}"name="chambre[${i}][nbr]" required class="form-control is-invalid" min=0> 
               <label class="form-label" for="form6Example1">Nbr Chambre :</label>
                </div>
                 </div> 
                 <div class="col-12 col-md-3 mb-4"> 
                 <div class="form-outline"> 
-                <select id ="typechambre${i}" name="chambre[${j}][type]" class="form-control is-invalid" required> 
+                <select id ="typechambre${i}" name="chambre[${i}][typechambre]" class="form-control is-invalid" required> 
                 <option value="" disabled selected>Type chambre</option>
                  <option value="Simple">Simple</option> 
                  <option value="Double">Double</option>
@@ -153,11 +152,11 @@ function addbatiment() {
     add.innerHTML +=
         `  
                                         <div class="form-outline col-12 col-md-4 mb-4">
-                                            <select class="typebatiment${nbrbatiemnt}" name="typebatiment[${nbrbatiemnt}][type-batiment]" form-control is-invalid" required >
+                                            <select class="typebatiment${nbrbatiemnt}" name="typebatiment[${nbrbatiemnt}][typebatiment]" form-control is-invalid" required >
                                                 <option value="" disabled selected>Selectioner type de
                                                     reservation</option>
-                                                <option value="Appartement">Appartements</option>
-                                                <option value="bungalow">Bungalow</option>
+                                                <option value="11">Appartements</option>
+                                                <option value="12">Bungalow</option>
                                             </select>
                                             <label class="form-label" for="typebatiment">Type de Batiment
                                                 :</label>
@@ -166,7 +165,8 @@ function addbatiment() {
                                     addbat.insertAdjacentElement('beforeend',add)
     }
     
-}                   
+}     
+              
 document.addEventListener('change',(e)=>{
     
     for(let j = 1 ; j<=i ; j++){
@@ -214,7 +214,7 @@ document.addEventListener('change',(e)=>{
         document.querySelector(`.vue-type${j}`).innerHTML = `
         <select id="typevue${j}" name="chambre[${j}][vue]"  class="form-control is-invalid" required> 
                            <option value="" disabled selected>Selectionner type de vue </option>
-                            <option value="hotel">Interieur</option> 
+                            <option value="Interieur">Interieur</option> 
                              </select>
                               <label class="form-label" for="vue">Type de vue :</label>
         
@@ -252,7 +252,7 @@ document.addEventListener("input", function(e){
             document.getElementById(`type-lit-enf${g}`).innerHTML = 
             `
             <label for="">Selectionner offre:
-            <select name="" id="litenf${g}"name="chambreenf[${g}][type]"  class="enf-option form-control is-invalid" required>
+            <select name="chambreenf[${g}][type]"  class="enf-option form-control is-invalid" required>
             <option value=""  disabled selected>--Selectionner type batiment--</option>
             <option value="6">Supplement lit </option>
             <option value="7">Pas Supplement lit </option>
@@ -264,7 +264,7 @@ document.addEventListener("input", function(e){
             document.querySelector(`#type-lit-enf${g}`).innerHTML = 
             `
             <label for="">Selectionner offre:
-            <select name="" id="litenf${g}" name="chambreenf[${g}][type]" class="enf-option form-control is-invalid" required>
+            <select  name="chambreenf[${g}][type]" class="enf-option form-control is-invalid" required>
             <option value=""  disabled selected>--Selectionner type batiment--</option>
             <option value="8">50% chambre simple</option>
             </select>
@@ -277,7 +277,7 @@ document.addEventListener("input", function(e){
             document.querySelector(`#type-lit-enf${g}`).innerHTML = 
          `
             <label for="">Selectionner offre:
-            <select name=""id="litenf${g}" name="chambreenf[${g}][type]"  class="enf-option form-control is-invalid" required>
+            <select  name="chambreenf[${g}][type]"  class="enf-option form-control is-invalid" required>
             <option value=""  disabled selected>--Selectionner type batiment--</option>
             <option value="1">chambre simple</option>
             <option value="9>70% chambre simple</option>
