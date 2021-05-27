@@ -33,7 +33,6 @@ if (a.value == "hotel") {
       </div>
     </div>
       </div>
-
       <div class="newchambre1 row">
       <div class="col-12 col-md-2 mb-4">
        <div class="form-outline">
@@ -151,16 +150,19 @@ function addbatiment() {
     {
     add.innerHTML +=
         `  
-                                        <div class="form-outline col-12 col-md-4 mb-4">
-                                            <select class="typebatiment${nbrbatiemnt}" name="typebatiment[${nbrbatiemnt}][typebatiment]" form-control is-invalid" required >
-                                                <option value="" disabled selected>Selectioner type de
-                                                    reservation</option>
-                                                <option value="11">Appartements</option>
-                                                <option value="12">Bungalow</option>
-                                            </select>
-                                            <label class="form-label" for="typebatiment">Type de Batiment
-                                                :</label>
-                                        </div>
+        <div class="col-12 col-md-4 mb-4">
+        <div class="form-outline">
+            <select class="typebatiment form-control is-invalid" name="typebatiment[${nbrbatiemnt}][typebatiment]"required 
+                onchange="hotel()">
+                <option value="" disabled selected>Selectioner type de
+                    reservation</option>
+                <option value="11">Appartements</option>
+                <option value="12">Bungalow</option>
+            </select>
+            <label class="form-label" for="form6Example1">Type de Batiment
+                :</label>
+        </div>
+    </div>  
                                     `;
                                     addbat.insertAdjacentElement('beforeend',add)
     }

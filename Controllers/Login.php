@@ -16,7 +16,7 @@ if (isset($_POST['seconnecter']))
     } 
     else {  
         echo "<script>alert(\"l'email ou le mot de passe n'est pas correct\")</script>";  
-        
+        header("location:../vue/Accueill.php"); 
     }        
 }
 ?>

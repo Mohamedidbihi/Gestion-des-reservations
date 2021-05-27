@@ -38,7 +38,7 @@ require_once ("../Database/Db.php");
                 <div class="mx-auto"></div>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-warning " href="#">Home</a>
+                   <a class="nav-link text-white " href="AccueillClient.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Restaurants</a>
@@ -137,47 +137,20 @@ require_once ("../Database/Db.php");
                                     <?php
                                     if(!empty($_SESSION['Total']))
                                     {
-                                       $id= $_SESSION['Id_Reservation'];
-                                       $query="SELECT * FROM module m ,filiere f, user u , formateur fr WHERE u.IdUser=fr.IdUser and f.IdF=m.idf AND fr.IdF=f.idformateur AND u.IdUser='".$_SESSION["iduser"]."'GROUP BY m.LebelleM";   
-                                        $sql = 'SELECT * from reservation where Id_Reservation=IdUser='".$_SESSION['Id_Reservation']"'';
-                                        $stmt = $this->conn->prepare($sql);
-                                        $stmt->execute([$Idres]);
-                                        $row   = $stmt->fetch(PDO::FETCH_ASSOC);
+                                    
                                         ?>
                                         <script>
                                             var dd=document.getElementById('form')
-                                            dd.innerHTML=` <h1 class="mb-5 text-center text-success ">Votre reservation pass avec succes avec le total :`+<?php echo $_SESSION['Total']  ?>+`
+                                            dd.innerHTML=` <h1 class="mb-5 text-center text-success ">Votre reservation pass avec succes avec le total `+<?php echo $_SESSION['Total']  ?>+`
                                             MAD </h1>
-                                            <p> Code Reservation :<?php echo $_SESSION['Id_Reservation']  ?></p>
-                                            <p>Date Debut Sejour :</p> 
-                                            <p>Date Fin Sejour :</p>
+                                            <p class="font-monospace">- Code Reservation :<?php echo $_SESSION['Id_Reservation']  ?></p>
+                                            <p class="font-monospace">- Date Debut Sejour : <?php echo $_SESSION['DATEARRIVE']  ?></p> 
+                                            <p class="font-monospace">- Date Fin Sejour :<?php echo $_SESSION['DATEDEPART']  ?></p>
                                             
                                             `;
                                         </script>
                                   <?php  }
-if(isset($_POST['reserver']))
-{
- error_reporting(0);
-   $chambree = $_POST['chambre'];
-   $chambrenf = $_POST['chambreenf'];
-  print_r($chambree);
-  foreach($chambrenf as $row => $innerArray){
-    foreach($innerArray as $innerRow => $value){
-        echo $value. "<br/>";
-    
-    }
-}
-//     foreach($chambree as $innerRow => $value){
-        
-//       echo $value['nbr']. "<br/>";
-//       echo $value['typechambre']. "<br/>";
-//       echo $value['vue']. "<br/>";
-//       echo $value['typelit']. "<br/>";
-    
-    
-//   }
-   
-}
+
 unset($_SESSION['Total']);
 ?>
                                 </div>
